@@ -1,11 +1,9 @@
 local M = {}
 
-M.get_solution_dir = function(filename)
-	local sln_dir = vim.fs.find(function(name)
-		return name:match("%.slnx?$")
-	end, { path = vim.fs.dirname(filename), limit = 1, upward = true, type = "file" })[1]
+local U = require("util")
 
-	return vim.fs.dirname(sln_dir)
+M.get_solution_dir = function(filename)
+	return U.get_parent_dir(filename, "%.slnx?$")
 end
 
 M.get_namespace = function(_, buf)
