@@ -32,7 +32,7 @@ M.setup = function(opts)
 
 	if project_local_nvim_config then
 		vim.notify("Found project level nvim config", vim.log.levels.INFO)
-		local project_local_commands_file = project_local_nvim_config .. "/terminal_commands.lua"
+		local project_local_commands_file = project_local_nvim_config .. "/.nvim/terminal_commands.lua"
 		vim.notify("Searching " .. project_local_commands_file, vim.log.levels.INFO)
 
 		if vim.fn.filereadable(project_local_commands_file) == 1 then
