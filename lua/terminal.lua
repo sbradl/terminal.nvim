@@ -28,7 +28,7 @@ M.setup = function(opts)
 		end
 	end
 
-	local project_local_nvim_config = vim.fr.root(0, ".nvim")
+	local project_local_nvim_config = vim.fs.root(0, ".nvim")
 
 	if project_local_nvim_config then
 		local project_local_commands_file = project_local_nvim_config .. "/terminal_commands.lua"
