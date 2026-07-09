@@ -21,22 +21,20 @@ M.get_namespace = function(_, buf)
 end
 
 M.commands = {
-	cs = {
-		{
-			label = "dotnet test current file",
-			cmd = function(filename)
-				local sln_dir = M.get_solution_dir(filename)
-				return "cd " .. sln_dir .. "\ndotnet test --filter ClassName~" .. vim.fn.fnamemodify(filename, ":t:r")
-			end,
-		},
-		{
-			label = "dotnet test current namespace",
-			cmd = function(filename, buf)
-				local sln_dir = M.get_solution_dir(filename)
-				local ns = M.get_namespace(filename, buf)
-				return "cd " .. sln_dir .. "\ndotnet test --filter FullyQualifiedName~" .. ns
-			end,
-		},
+	{
+		label = "dotnet test current file",
+		cmd = function(filename)
+			local sln_dir = M.get_solution_dir(filename)
+			return "cd " .. sln_dir .. "\ndotnet test --filter ClassName~" .. vim.fn.fnamemodify(filename, ":t:r")
+		end,
+	},
+	{
+		label = "dotnet test current namespace",
+		cmd = function(filename, buf)
+			local sln_dir = M.get_solution_dir(filename)
+			local ns = M.get_namespace(filename, buf)
+			return "cd " .. sln_dir .. "\ndotnet test --filter FullyQualifiedName~" .. ns
+		end,
 	},
 }
 

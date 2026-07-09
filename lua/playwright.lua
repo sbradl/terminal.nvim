@@ -5,17 +5,15 @@ M.get_project_dir = function(filename)
 end
 
 M.commands = {
-	ts = {
-		{
-			filter = function(filename)
-				return M.get_project_dir(filename) ~= nil
-			end,
-			label = "Playwright current file",
-			cmd = function(filename)
-				local project_dir = M.get_project_dir(filename)
-				return "cd " .. project_dir .. "\nnpx playwright test"
-			end,
-		},
+	{
+		filter = function(filename)
+			return M.get_project_dir(filename) ~= nil
+		end,
+		label = "Playwright current file",
+		cmd = function(filename)
+			local project_dir = M.get_project_dir(filename)
+			return "cd " .. project_dir .. "\nnpx playwright test"
+		end,
 	},
 }
 

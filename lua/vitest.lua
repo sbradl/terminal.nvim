@@ -5,22 +5,20 @@ M.get_project_dir = function(filename)
 end
 
 M.commands = {
-	ts = {
-		{
-			label = "vitest current file",
-			cmd = function(filename)
-				local project_dir = M.get_project_dir(filename)
-				local relative_path = vim.fs.relpath(project_dir, filename)
-				return "cd " .. project_dir .. "\nnpx vitest " .. relative_path
-			end,
-		},
-		{
-			label = "vitest all",
-			cmd = function(filename)
-				local project_dir = M.get_project_dir(filename)
-				return "cd " .. project_dir .. "\nnpx vitest"
-			end,
-		},
+	{
+		label = "vitest current file",
+		cmd = function(filename)
+			local project_dir = M.get_project_dir(filename)
+			local relative_path = vim.fs.relpath(project_dir, filename)
+			return "cd " .. project_dir .. "\nnpx vitest " .. relative_path
+		end,
+	},
+	{
+		label = "vitest all",
+		cmd = function(filename)
+			local project_dir = M.get_project_dir(filename)
+			return "cd " .. project_dir .. "\nnpx vitest"
+		end,
 	},
 }
 
