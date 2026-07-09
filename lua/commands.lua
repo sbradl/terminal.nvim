@@ -23,7 +23,7 @@ M.choose_and_run_command = function(commands)
 
 	local options = {}
 	for _, choice in ipairs(choices) do
-		if choice.filter ~= nil and choice.filter(name) then
+		if choice.filter == nil or choice.filter(name) then
 			table.insert(options, choice.label)
 		end
 	end
