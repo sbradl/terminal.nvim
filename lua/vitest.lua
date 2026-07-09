@@ -11,7 +11,7 @@ M.commands = {
 		{
 			label = "vitest current file",
 			cmd = function(filename)
-				local project_dir = M.get_solution_dir(filename)
+				local project_dir = M.get_project_dir(filename)
 				local relative_path = vim.fs.relpath(project_dir, filename)
 				return "cd " .. project_dir .. "\nnpx vitest" .. relative_path
 			end,
