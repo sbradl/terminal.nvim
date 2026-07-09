@@ -1,9 +1,7 @@
 local M = {}
 
-local U = require("util")
-
 M.get_project_dir = function(filename)
-	return U.get_parent_dir(filename, "vitest.config.ts")
+	return vim.fs.root(filename, { "vitest.config.ts", "vitest.config.js", "package.json" })
 end
 
 M.commands = {
@@ -14,6 +12,13 @@ M.commands = {
 				local project_dir = M.get_project_dir(filename)
 				local relative_path = vim.fs.relpath(project_dir, filename)
 				return "cd " .. project_dir .. "\nnpx vitest" .. relative_path
+			end,
+		},
+		{
+			label = "vitest all",
+			cmd = function(filename)
+				local project_dir = M.get_project_dir(filename)
+				return "cd " .. project_dir .. "\nnpx vitest"
 			end,
 		},
 	},
