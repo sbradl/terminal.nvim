@@ -42,7 +42,7 @@ M.choose_and_run_command = function(commands)
 		end
 
 		if selected_cmd and type(selected_cmd) == "function" then
-			t.open_terminal_and_run_command(selected_cmd(name, buf))
+			M.open_terminal_and_run_command(selected_cmd(name, buf))
 		end
 	end)
 end
