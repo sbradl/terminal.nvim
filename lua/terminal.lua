@@ -27,6 +27,27 @@ M.setup = function(opts)
 			M.register(ext, command_list)
 		end
 	end
+
+	local project_local_nvim_config = vim.fr.root(0, ".nvim")
+
+	if project_local_nvim_config then
+		local project_local_commands_file = project_local_nvim_config .. "/terminal_commands.lua"
+
+		if vim.fn.filereadable(project_local_commands_file) == 1 then
+			local chunk, err = loadfile(project_local_commands_file)
+			if chunk then
+				local project_local_commands = chunk()
+
+				if type(project_local_commands) == "table" then
+					for ext, command_list in pairs(project_local_commands) do
+						M.register(ext, command_list)
+					end
+				end
+			else
+				vim.notify("Error loading project local commands: " .. tostring(err), vim.log.levels.ERROR)
+			end
+		end
+	end
 end
 
 M.focus_last_terminal = t.focus_last_terminal
