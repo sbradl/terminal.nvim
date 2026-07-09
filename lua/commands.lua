@@ -23,7 +23,9 @@ M.choose_and_run_command = function(commands)
 
 	local options = {}
 	for _, choice in ipairs(choices) do
-		table.insert(options, choice.label)
+		if choice.filter and choice.filter(name) then
+			table.insert(options, choice.label)
+		end
 	end
 
 	vim.ui.select(options, {

@@ -4,8 +4,9 @@ local t = require("terminal_handling")
 local c = require("commands")
 local dotnet_test = require("dotnet_test")
 local vitest = require("vitest")
+local playwright = require("playwright")
 
-local filetype_commands = vim.tbl_deep_extend("force", dotnet_test.commands, vitest.commands)
+local filetype_commands = vim.tbl_deep_extend("force", dotnet_test.commands, vitest.commands, playwright.commands)
 
 M.setup = function() end
 M.focus_last_terminal = t.focus_last_terminal
