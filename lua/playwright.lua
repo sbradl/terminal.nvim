@@ -12,7 +12,10 @@ M.commands = {
 		label = "Playwright current file",
 		cmd = function(filename)
 			local project_dir = M.get_project_dir(filename)
-			return "cd " .. project_dir .. "\nnpx playwright test"
+			return {
+				dir = project_dir,
+				command_line = "npx playwright test",
+			}
 		end,
 	},
 }

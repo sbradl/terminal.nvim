@@ -4,12 +4,12 @@ local t = require("terminal_handling")
 local default_commands = require("default_commands").commands
 
 M.open_terminal_and_run_command = function(command)
-	t.open_new_terminal()
+	t.open_new_terminal(command.dir)
 	local new_buf = vim.api.nvim_get_current_buf()
 	vim.defer_fn(function()
 		local chan_id = vim.b[new_buf].terminal_job_id
 		if chan_id then
-			vim.api.nvim_chan_send(chan_id, command .. "\n")
+			vim.api.nvim_chan_send(chan_id, command.command_line .. "\n")
 		end
 	end, 50)
 end
