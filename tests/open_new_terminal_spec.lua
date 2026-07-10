@@ -29,4 +29,19 @@ describe("open_new_terminal", function()
 
 		t.assert_insert_mode()
 	end)
+
+	it("should open new terminals everytime", function()
+		open_new_terminal()
+		open_new_terminal()
+
+		t.assert_window_count(3)
+	end)
+
+	describe("given current buffer is file", function()
+		pending("it should open terminal in directory of file", function() end)
+	end)
+
+	describe("given current buffer is not associated with file", function()
+		pending("it should open terminal in current working directory", function() end)
+	end)
 end)
