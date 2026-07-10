@@ -6,6 +6,16 @@ Opening terminals in a predefined order / position based on my personal preferen
 
 ![image](./screenshot.png)
 
+## Configuration
+
+Call `setup` with optional settings:
+
+```lua
+require("terminal").setup({
+  size = 20, -- height in rows of the bottom terminal split (default 20)
+})
+```
+
 ## focus_last_terminal
 
 Focuses the rightmost terminal. If no terminal exists it opens a new one in a bottom split. The terminal will be automatically set to insert mode.

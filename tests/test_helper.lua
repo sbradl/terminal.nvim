@@ -19,6 +19,10 @@ M.assert_insert_mode = function()
 	assert.equals("i", vim.api.nvim_get_mode().mode)
 end
 
+M.assert_window_height = function(expected)
+	assert.equals(expected, vim.api.nvim_win_get_height(0))
+end
+
 M.assert_terminal_cwd = function(expected)
 	M.assert_current_window_is_terminal()
 	assert.equals(expected, vim.fn.getcwd())
