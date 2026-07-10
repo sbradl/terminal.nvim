@@ -1,5 +1,7 @@
 # terminal.nvim
 
+[![Tests](https://github.com/sbradl/terminal.nvim/actions/workflows/ci.yml/badge.svg)](https://github.com/sbradl/terminal.nvim/actions/workflows/ci.yml)
+
 Opening terminals in a predefined order / position based on my personal preference.
 
 ![image](./screenshot.png)
