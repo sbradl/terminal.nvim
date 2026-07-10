@@ -1,6 +1,6 @@
 local M = {}
 
-local t = require("terminal_handling")
+local t = require("terminal.handling")
 
 M.setup = function() end
 
