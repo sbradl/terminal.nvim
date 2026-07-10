@@ -6,9 +6,8 @@ local function assert_window_count(expected_count)
 end
 
 local function assert_current_window_is_not_terminal()
-	local windows = vim.api.nvim_list_wins()
-	vim.api.nvim_set_current_win(windows[1])
-	assert.not_equals("terminal", vim.bo.buftype)
+	local current_buf = vim.api.nvim_get_current_buf()
+	assert.not_equals("terminal", vim.bo[current_buf].buftype)
 end
 
 local function assert_current_window_is_terminal()
@@ -18,6 +17,12 @@ end
 
 local function assert_insert_mode()
 	assert.equals("i", vim.api.nvim_get_mode().mode)
+end
+
+local function focus_non_terminal()
+	local windows = vim.api.nvim_list_wins()
+	vim.api.nvim_set_current_win(windows[1])
+	assert_current_window_is_not_terminal()
 end
 
 describe("focus_last_terminal", function() -- Helper function to clean up the workspace before/after tests
@@ -49,8 +54,9 @@ describe("focus_last_terminal", function() -- Helper function to clean up the wo
 
 	describe("given no terminal is open", function()
 		before_each(function()
-			assert.equals(1, #vim.api.nvim_list_wins())
-			assert.not_equals("terminal", vim.bo.buftype)
+			assert_window_count(1)
+			focus_non_terminal()
+			assert_current_window_is_not_terminal()
 		end)
 
 		it("should open new terminal in bottom split", function()
@@ -76,6 +82,8 @@ describe("focus_last_terminal", function() -- Helper function to clean up the wo
 		before_each(function()
 			focus_last_terminal()
 			assert_window_count(2)
+			focus_non_terminal()
+			assert_current_window_is_not_terminal()
 		end)
 
 		it("should not open new terminal", function()
@@ -85,8 +93,6 @@ describe("focus_last_terminal", function() -- Helper function to clean up the wo
 		end)
 
 		it("should focus terminal", function()
-			assert_current_window_is_not_terminal()
-
 			focus_last_terminal()
 
 			assert_current_window_is_terminal()
