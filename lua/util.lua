@@ -1,7 +1,7 @@
 local M = {}
 
-M.cd_to = function(dir)
-	return "cd " .. dir .. "\n"
+M.get_git_dir = function(filename)
+	return vim.fs.root(filename, { ".git" })
 end
 
 return M

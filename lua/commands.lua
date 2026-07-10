@@ -29,7 +29,7 @@ M.choose_and_run_command = function(commands)
 	end
 
 	vim.ui.select(options, {
-		prompt = "Execute for: " .. name,
+		prompt = name,
 	}, function(selected_label)
 		if not selected_label then
 			return
@@ -44,7 +44,14 @@ M.choose_and_run_command = function(commands)
 		end
 
 		if selected_cmd and type(selected_cmd) == "function" then
-			M.open_terminal_and_run_command(selected_cmd(name, buf))
+			local command_description = selected_cmd(name, buf)
+			local command_type = command_description.type or "terminal"
+
+			if command_type == "terminal" then
+				M.open_terminal_and_run_command(command_description)
+			elseif command_type == "nvim" then
+				vim.cmd(command_description.command_line)
+			end
 		end
 	end)
 end
