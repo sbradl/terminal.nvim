@@ -19,6 +19,16 @@ M.assert_insert_mode = function()
 	assert.equals("i", vim.api.nvim_get_mode().mode)
 end
 
+M.assert_terminal_cwd = function(expected)
+	M.assert_current_window_is_terminal()
+	assert.equals(expected, vim.fn.getcwd())
+end
+
+-- Absolute path to a file/dir under the testdata/ fixtures.
+M.testdata = function(relative_path)
+	return vim.fn.getcwd(-1, -1) .. "/testdata/" .. relative_path
+end
+
 M.focus_non_terminal = function()
 	local windows = vim.api.nvim_list_wins()
 	vim.api.nvim_set_current_win(windows[1])
